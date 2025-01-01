@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.alphadominche.steampunkhmi" platformBuildVersionCode="18" platformBuildVersionName="4.3.1-1425645">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <permission android:label="flow_meter_permission" android:name="com.alphadominche.STEAM_PUNK_CONTROL"/>
+    <uses-permission android:name="com.alphadominche.STEAM_PUNK_CONTROL"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <application android:allowBackup="true" android:icon="@drawable/ad_mincher_logo" android:label="@string/app_name" android:theme="@style/AppTheme">
+        <uses-library android:name="com.android.future.usb.accessory" android:protectionLevel="normal" android:required="false"/>
+        <service android:exported="false" android:name="com.alphadominche.steampunkhmi.SPIOIOService">
+            <intent-filter>
+                <action android:name="START_SPIOIO_SERVICE"/>
+                <action android:name="CRUCIBLE_COMMAND"/>
+                <action android:name="MACHINE_COMMAND"/>
+                <action android:name="MANUAL_MODE_COMMAND"/>
+            </intent-filter>
+        </service>
+        <service android:label="Update Service" android:name=".SPUpdateService"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:label="@string/home_crucibles_title_text" android:launchMode="singleTask" android:name="com.alphadominche.steampunkhmi.SPCruciblesActivity" android:screenOrientation="sensorPortrait" android:windowSoftInputMode="stateAlwaysHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.HOME"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.hardware.usb.action.USB_ACCESSORY_ATTACHED"/>
+            </intent-filter>
+            <meta-data android:name="android.hardware.usb.action.USB_ACCESSORY_ATTACHED" android:resource="@xml/accessory_filter"/>
+        </activity>
+        <receiver android:enabled="true" android:exported="false" android:name="com.alphadominche.steampunkhmi.SPServiceReceiver" android:permission="com.alphadominche.STEAMPUNK_CONTROL">
+            <intent-filter>
+                <action android:name="CRUCIBLE_STATUS"/>
+                <action android:name="BOILER_STATUS"/>
+                <action android:name="MACHINE_SETTINGS_STATUS"/>
+                <action android:name="MACHINE_SETTINGS_REQUEST"/>
+                <action android:name="STEAMPUNK_ERROR_BROADCAST"/>
+                <action android:name="RELEASE_STEAM_BROADCAST"/>
+                <action android:name="IOIO_CONNECTED_BROADCAST"/>
+                <action android:name="NETWORK_CONNECTED_BROADCAST"/>
+                <action android:name="NETWORK_NOT_CONNECTED_BROADCAST"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.alphadominche.steampunkhmi.SPPowerPlugReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
+            </intent-filter>
+        </receiver>
+        <activity android:configChanges="keyboardHidden|orientation" android:label="@string/library_title_text" android:launchMode="singleTop" android:name="com.alphadominche.steampunkhmi.SPLibraryActivity" android:screenOrientation="sensorPortrait" android:windowSoftInputMode="stateHidden">
+            <meta-data android:name="android.app.searchable" android:resource="@xml/searchable"/>
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation" android:label="@string/title_activity_tea_recipe_editor" android:name="com.alphadominche.steampunkhmi.SPRecipeEditorActivity" android:screenOrientation="sensorPortrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:label="@string/title_activity_spactivity" android:name="com.alphadominche.steampunkhmi.SPActivity" android:screenOrientation="sensorPortrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:label="@string/title_activity_main_menu_mockup" android:name="com.alphadominche.steampunkhmi.MainMenuMockup" android:screenOrientation="sensorPortrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:label="@string/machine_settings_title_text" android:name="com.alphadominche.steampunkhmi.SPMachineSettingsActivity" android:screenOrientation="sensorPortrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:label="@string/account_settings_title_text" android:name="com.alphadominche.steampunkhmi.SPAccountSettingsActivity" android:screenOrientation="sensorPortrait" android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:label="@string/privacy_settings_title_text" android:name="com.alphadominche.steampunkhmi.SPPrivacySettingsActivity" android:screenOrientation="sensorPortrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:label="@string/terms_and_policies_title_text" android:name="com.alphadominche.steampunkhmi.SPTermsActivity" android:screenOrientation="sensorPortrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:excludeFromRecents="true" android:label="@string/app_name" android:launchMode="singleTop" android:name="com.alphadominche.steampunkhmi.SPLoginActivity" android:noHistory="true" android:screenOrientation="sensorPortrait" android:windowSoftInputMode="stateHidden"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:label="@string/cleaning_cycle_title_text" android:name="com.alphadominche.steampunkhmi.SPCleaningCycleActivity" android:screenOrientation="sensorPortrait"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:label="@string/cleaning_cycle_settings_title_text" android:name="com.alphadominche.steampunkhmi.SPCleaningCycleSettingsActivity" android:screenOrientation="sensorPortrait"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:label="@string/favorites_title_text" android:name="com.alphadominche.steampunkhmi.SPFavoritesActivity" android:screenOrientation="sensorPortrait"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:label="@string/my_recipes_title_text" android:name="com.alphadominche.steampunkhmi.SPMyRecipesActivity" android:screenOrientation="sensorPortrait"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:label="@string/switchboard_title_text" android:name="com.alphadominche.steampunkhmi.SPSwitchboardActivity" android:screenOrientation="sensorPortrait"/>
+        <service android:enabled="true" android:exported="false" android:name="com.alphadominche.steampunkhmi.restclient.presistenceservice.PersistenceService"/>
+        <provider android:authorities="com.alphadominche.steampunkhmi.provider.HomeActivity" android:exported="false" android:name="com.alphadominche.steampunkhmi.contentprovider.Provider"/>
+    </application>
+</manifest>

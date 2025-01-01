@@ -1,0 +1,26 @@
+!!brut.androlib.meta.MetaInfo
+apkFileName: alphadom.apk
+compressionType: false
+doNotCompress:
+- resources.arsc
+- png
+isFrameworkApk: false
+packageInfo:
+  forcedPackageId: '127'
+  renameManifestPackage: null
+sdkInfo:
+  minSdkVersion: '17'
+  targetSdkVersion: '18'
+sharedLibrary: false
+sparseResources: true
+unknownFiles:
+  ContentProvider.xml: '8'
+  gen.properties: '8'
+usesFramework:
+  ids:
+  - 1
+  tag: null
+version: 2.6.1
+versionInfo:
+  versionCode: '98'
+  versionName: 2.0.0_158
